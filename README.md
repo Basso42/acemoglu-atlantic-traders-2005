@@ -32,7 +32,7 @@ The dataset includes:
 To set up the project, first clone the repository:
 
 ```sh
-$ git clone https://github.com/your-username/acemoglu-atlantic-traders-2005.git
+$ git clone https://github.com/Basso42/acemoglu-atlantic-traders-2005.git
 $ cd acemoglu-atlantic-traders-2005
 ```
 
