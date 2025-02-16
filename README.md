@@ -51,7 +51,6 @@ This project requires the following Python libraries:
 - `pandas`
 - `statsmodels`
 - `matplotlib`
-- `jupyter`
 
 All dependencies can be installed via:
 ```sh
