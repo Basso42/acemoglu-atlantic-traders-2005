@@ -8,7 +8,7 @@ Daron Acemoglu, Simon Johnson, and James Robinson
 
 ## Overview
 
-This project aims to reproduce the tables and figures from the paper in python.
+This project aims to reproduce the tables and figures from the paper with python.
 
 ## Repository Structure
 
