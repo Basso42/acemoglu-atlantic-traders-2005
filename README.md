@@ -13,7 +13,7 @@ This project aims to reproduce the tables and figures from the paper in python.
 ## Repository Structure
 
 ```
-📂 rise_of_europe_reproduction
+📂 acemoglu-atlantic-traders-2005
 │-- 📄 README.md         # Project description and instructions
 │-- 📄 requirements.txt  # List of dependencies
 │-- 📂 data/             # Folder containing datasets (included in the repo)
