@@ -6,9 +6,6 @@ This repository provides a Python-based replication of the results from:
 Daron Acemoglu, Simon Johnson, and James Robinson  
 *American Economic Review, Vol. 95, No. 3, June 2005, pp. 546–579.*  
 
-## Overview
-
-This project aims to reproduce the tables and figures from the paper with python.
 
 ## Repository Structure
 
@@ -18,6 +15,7 @@ This project aims to reproduce the tables and figures from the paper with python
 │-- 📄 requirements.txt  # List of dependencies
 │-- 📂 data/             # Folder containing datasets (included in the repo)
 │-- 📂 src/              # Python scripts for data processing and analysis
+│-- 📂 figures/          # Awesome 🤪 matplotlib graphs (figure 1a and 1b of the paper)
 ```
 
 ## Data Sources
