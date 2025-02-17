@@ -8,7 +8,7 @@ Daron Acemoglu, Simon Johnson, and James Robinson
 
 ## Overview
 
-This project aims to reproduce the tables and figures from the paper in python.
+This project aims to reproduce the tables and figures from the paper with python.
 
 ## Repository Structure
 
@@ -32,7 +32,7 @@ The dataset includes:
 To set up the project, first clone the repository:
 
 ```sh
-$ git clone https://github.com/your-username/acemoglu-atlantic-traders-2005.git
+$ git clone https://github.com/Basso42/acemoglu-atlantic-traders-2005.git
 $ cd acemoglu-atlantic-traders-2005
 ```
 
@@ -51,7 +51,6 @@ This project requires the following Python libraries:
 - `pandas`
 - `statsmodels`
 - `matplotlib`
-- `jupyter`
 
 All dependencies can be installed via:
 ```sh
