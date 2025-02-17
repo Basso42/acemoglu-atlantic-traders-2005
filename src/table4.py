@@ -9,18 +9,17 @@ import statsmodels.formula.api as smf
 
 from utils import weighted_regression, unweighted_regression
 
-# Set paths
 directory = os.getcwd()
 data_path = directory[:directory.rfind('/')] + '/data'
 figure_path = directory[:directory.rfind('/')] + '/figures'
 print(f"data_path : {data_path}")
 print(f"figure_path : {figure_path}")
 
-# Load dataset
+# load data
 df_country = pd.read_stata(data_path + "/REPLICATION-RoE-country-dataset-FINAL.dta")
 
 
-# Define variables
+# define regressors
 western_vars = [f'westerneurope{year}' for year in [1600, 1700, 1750, 1800, 1850]]
 protestant_vars = [f'protestant{year}' for year in [1600, 1700, 1750, 1800, 1850]]
 roman_vars = [f'romanempire{year}' for year in [1600, 1700, 1750, 1800, 1850]]
@@ -43,11 +42,10 @@ formulas = {
     "Structured Column 6 (GDP Wars)": "loggdppcmaddison ~ " + " + ".join(western_vars + protestant_vars + year_vars + country_vars + [trade_vars[0], "warsperyear"]),
     "Structured Column 7 (GDP Roman Heritage)": "loggdppcmaddison ~ " + " + ".join(western_vars + year_vars + roman_vars + country_vars + [trade_vars[0]]),
     "Structured Column 8 (GDP Latitude)": "loggdppcmaddison ~ " + " + ".join(western_vars + year_vars + latitude_vars + country_vars + [trade_vars[0]])
-
 }
 
 
-# Run regressions
+# regressions
 regressions = {}
 for col, formula in formulas.items():
     regressions[col] = weighted_regression(formula, df_country[base_filter_extended if "loggdppcmaddison" in formula else base_filter], "totalpopulation")
@@ -68,7 +66,7 @@ formulas.update({
 for col, formula in formulas.items():
     regressions[col] = weighted_regression(formula, df_country[base_filter_extended if "loggdppcmaddison" in formula else base_filter], "totalpopulation")
 
-# Display the table
+#results
 for col, model in regressions.items():
     print(f"Results for {col}:\n")
     print(model.summary())
