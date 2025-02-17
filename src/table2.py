@@ -5,6 +5,8 @@ import os
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
+from utils import weighted_regression, unweighted_regression
+
 
 directory = os.getcwd()
 data_path = directory[:directory.rfind('/')] + '/data'
@@ -30,6 +32,10 @@ def run_regression(data, formula, weight_col=None):
 # Filtering dataset
 base_filter = (df_country['asia'] != 1) & (df_country['date'] > 1200) & (df_country['date'] < 1900)
 data_filtered = df_country[base_filter]
+
+"""
+Panel A: flexible specification - MATCHING RESULTS
+"""
 
 # Define regression formulas
 base_formula = "sjurbanization ~ westerneurope1600 + westerneurope1700 + westerneurope1750 + westerneurope1800 + westerneurope1850 + "
@@ -69,3 +75,43 @@ for col, model in regressions.items():
     print(f"Results for {col}:")
     print(model.summary())
     print("\n" + "="*50 + "\n")
+
+
+"""
+Panel B: structured specification - MATCHING RESULTS
+"""
+# Define variables
+western_vars = [f'westerneurope{year}' for year in [1600, 1700, 1750, 1800, 1850]]
+country_vars = [f'country{i}' for i in range(1, 30)]
+year_vars = [f'yr{i}' for i in [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1750, 1800, 1850]]
+trade_vars = ["logsept2002atradexatlantictrader", "logsept2002atradexcoasttoarea"]
+
+# Define filters
+base_filter = (df_country["asia"] != 1) & (df_country["date"] > 1200) & (df_country["date"] < 1900)
+base_filter_extended = (df_country["asia"] != 1) & (df_country["date"] < 1900)
+
+# Define regression formulas
+formula_1 = "sjurbanization ~ " + " + ".join(western_vars + country_vars + year_vars)
+formula_trade = formula_1 + " + " + trade_vars[0]
+formula_trade_coast = formula_1 + " + " + trade_vars[1]
+
+# Run regressions
+regressions = {
+    "Column 1": weighted_regression(formula_1, df_country[base_filter], "totalpopulation"),
+    "Column 2": weighted_regression(formula_1, df_country[base_filter_extended], "totalpopulation"),
+    "Column 3": weighted_regression(formula_trade, df_country[base_filter], "totalpopulation"),
+    "Column 4": weighted_regression(formula_trade, df_country[base_filter_extended], "totalpopulation"),
+    "Column 5": unweighted_regression(formula_trade, df_country[base_filter & df_country["totalpopulation"].notna()]),
+    "Column 6": weighted_regression(formula_trade, df_country[(df_country["date"] > 1200) & (df_country["date"] < 1900)], "totalpopulation"),
+    "Column 7": weighted_regression(formula_trade, df_country[base_filter & (df_country["countryid"] != 7)], "totalpopulation"),
+    "Column 8": weighted_regression(formula_trade_coast, df_country[base_filter], "totalpopulation"),
+    "Column 9": weighted_regression(formula_trade_coast, df_country[base_filter_extended], "totalpopulation"),
+    "Column 10": unweighted_regression(formula_trade_coast, df_country[base_filter & df_country["totalpopulation"].notna()]),
+}
+
+# Display results
+for col, model in regressions.items():
+    print(f"Results for {col}:")
+    print(model.summary())
+    print("\n" + "="*50 + "\n")
+
