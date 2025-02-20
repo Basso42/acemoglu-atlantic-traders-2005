@@ -1,5 +1,6 @@
 """
-regressions functions from stats model 
+Regressions functions from statsmodel used to replicate Acemoglu et al. tables
+Clarity over conciseness 
 """
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
