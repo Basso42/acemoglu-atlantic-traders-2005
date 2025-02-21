@@ -34,6 +34,12 @@ $ git clone https://github.com/Basso42/acemoglu-atlantic-traders-2005.git
 $ cd acemoglu-atlantic-traders-2005
 ```
 
+This project requires the following Python libraries:
+
+- `pandas`
+- `statsmodels`
+- `matplotlib`
+
 Create a virtual environment and install dependencies:
 
 ```sh
@@ -42,18 +48,6 @@ $ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 $ pip install -r requirements.txt
 ```
 
-## Dependencies
-
-This project requires the following Python libraries:
-
-- `pandas`
-- `statsmodels`
-- `matplotlib`
-
-All dependencies can be installed via:
-```sh
-$ pip install -r requirements.txt
-```
 
 ## References
 
